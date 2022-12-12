@@ -1,14 +1,18 @@
 const currentDayElement = $("#currentDay");
-let currentTimeStamp = moment();
+const blockList = $("#block-list");
 
-function displayCurrentDate() {
-  currentDayElement.text(moment().format("dddd, MMMM Do"));
+//Get current date in format like: "Friday, December 13th".
+function getCurrentDate() {
+  return moment().format("dddd, MMMM Do");
 }
 
-function createHourMarkup(hour) {
+//Creates markup for one hour timeblock.
+function createTimeblockMarkup(time24) {
+  let time12 = time24 < 12 ? time24 + "AM" : time24 - 12 + "PM";
+  if (time12 === "0PM") time12 = "12PM";
   const markup = `
-  <li class="time-block">
-    <div class="hour">${hour}</div>
+  <li class="time-block" data-time24=${time24}>
+    <div class="hour">${time12}</div>
     <textarea id="textarea" class="task" rows="4"></textarea>
     <button id="saveBtn" class="saveBtn">
       <i class="far fa-save"></i>
@@ -17,12 +21,24 @@ function createHourMarkup(hour) {
   return markup;
 }
 
-function createWorkDay(startTime, endTime) {
+//
+function renderWorkDay(startTime, endTime) {
   for (let i = startTime; i <= endTime; i++) {
-    let time = i < 12 ? i + "AM" : i - 12 + "PM";
-    if (time === "0PM") time = "12PM";
-    $("#task-list").append(createHourMarkup(time));
+    blockList.append(createTimeblockMarkup(i));
   }
 }
 
-createWorkDay(9, 17);
+//Changes background color of timeblocks.
+//Past = grey, Current = red, Future = green.
+function colorCodeTimeblocks() {
+  const CurrentDateAndTime = moment().format('H');
+
+  $("#block-list li").each(function (index, timeblock) {
+    if (timeblock.dataset.time24 < CurrentDateAndTime) {
+      timeblock.children(1).removeClass().addClass('task past')
+    }
+  });
+}
+
+renderWorkDay(9, 17);
+colorCodeTimeblocks();

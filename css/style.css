@@ -53,7 +53,7 @@ textarea {
   margin: 0;
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;
+  border-bottom: 1px solid white;
   grid-area: task;
   border-right: 1px solid black;
 }
@@ -66,6 +66,7 @@ textarea {
 
 .saveBtn {
   border: none;
+  border-bottom: 1px solid white;;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
