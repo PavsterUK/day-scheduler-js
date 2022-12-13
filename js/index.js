@@ -14,7 +14,7 @@ function createTimeblockMarkup(time24) {
   <li class="time-block" data-time24=${time24}>
     <div class="hour">${time12}</div>
     <textarea id="textarea" class="task" rows="4"></textarea>
-    <button id="saveBtn" class="saveBtn">
+    <button id="save-btn" class="saveBtn">
       <i class="far fa-save"></i>
     </button>
   </li>`;
@@ -22,7 +22,7 @@ function createTimeblockMarkup(time24) {
 }
 
 //
-function renderWorkDay(startTime, endTime) {
+function createDay(startTime, endTime) {
   for (let i = startTime; i <= endTime; i++) {
     blockList.append(createTimeblockMarkup(i));
   }
@@ -30,15 +30,38 @@ function renderWorkDay(startTime, endTime) {
 
 //Changes background color of timeblocks.
 //Past = grey, Current = red, Future = green.
-function colorCodeTimeblocks() {
-  const CurrentDateAndTime = moment().format('H');
-
+//+ sign before variable turns it into number from string.
+function colorTimeblocks() {
+  const CurrentTime = +moment().format("H");
   $("#block-list li").each(function (index, timeblock) {
-    if (timeblock.dataset.time24 < CurrentDateAndTime) {
-      timeblock.children(1).removeClass().addClass('task past')
+    const timeBlockTime24 = +timeblock.dataset.time24;
+    //Color past hours
+    if (timeBlockTime24 < CurrentTime) {
+      timeblock.children[1].className = "task past";
+      //Color present hour
+    } else if (timeBlockTime24 === CurrentTime) {
+      timeblock.children[1].className = "task present";
+      //Color future hours
+    } else if (timeBlockTime24 > CurrentTime) {
+      timeblock.children[1].className = "task future";
     }
   });
 }
 
-renderWorkDay(9, 17);
-colorCodeTimeblocks();
+function syncWithLocalStorage() {
+  let texAreaContent = {};
+  $("#block-list").each(function (index, timeblock) {
+    console.log(timeblock);
+    let hour = +timeblock.dataset.time24;
+    let text = timeblock.children[1].innerHTML;
+    texAreaContent[hour] = text;
+  });
+  
+}
+
+$("#block-list").delegate("li button", "click", function () {
+  syncWithLocalStorage();
+});
+
+createDay(9, 22);
+colorTimeblocks();

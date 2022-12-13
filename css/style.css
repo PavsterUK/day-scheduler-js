@@ -60,13 +60,13 @@ textarea {
 
 .task:focus {
   outline: none;
-  -webkit-box-shadow: inset 0px 0px 0px 4px lightskyblue;
-  box-shadow: inset 0px 0px 0px 4px lightskyblue;
+  -webkit-box-shadow: inset 0px 0px 0px 4px rgb(72, 163, 255);
+  box-shadow: inset 0px 0px 0px 4px rgb(72, 163, 255);
 }
 
 .saveBtn {
   border: none;
-  border-bottom: 1px solid white;;
+  border-bottom: 1px solid white;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
@@ -85,15 +85,15 @@ textarea {
 
 .past {
   background-color: #d3d3d3;
-  color: white;
+  color: black;
 }
 
 .present {
   background-color: #ff6961;
-  color: white;
+  color: black;
 }
 
 .future {
   background-color: #77dd77;
-  color: white;
+  color: black;
 }
