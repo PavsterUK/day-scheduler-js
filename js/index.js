@@ -13,7 +13,7 @@ function createTimeblockMarkup(time24) {
   const markup = `
   <li class="time-block" data-time24=${time24}>
     <div class="hour">${time12}</div>
-    <textarea id="textarea" class="task" rows="4"></textarea>
+    <textarea id=${"textarea" + time24} class="task" rows="4"></textarea>
     <button id="save-btn" class="saveBtn">
       <i class="far fa-save"></i>
     </button>
@@ -49,18 +49,12 @@ function colorTimeblocks() {
 }
 
 function syncWithLocalStorage() {
-  let texAreaContent = {};
-  $("#block-list").each(function (index, timeblock) {
-    console.log(timeblock);
-    let hour = +timeblock.dataset.time24;
-    let text = timeblock.children[1].innerHTML;
-    texAreaContent[hour] = text;
-  });
-  
+  console.log($('#textarea9').val());
 }
 
-$("#block-list").delegate("li button", "click", function () {
-  syncWithLocalStorage();
+$("#block-list").delegate("li button", "click", function (e) {
+  console.log(e)
+  // syncWithLocalStorage();
 });
 
 createDay(9, 22);
