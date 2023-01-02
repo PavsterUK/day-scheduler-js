@@ -26,9 +26,12 @@
     <header class="jumbotron">
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
-      <p id="currentDay" class="lead"></p>
+      <p id="currentDate" class="lead"></p>
     </header>
-    <div class="container">
+    <div class="timeblocks-wrapper">
+      <div id="localstorage-confirmation" class="hide">
+        <p>Saved to local storage &check;</p>
+      </div>
       <!-- Timeblocks go here -->
       <ul id="block-list"></ul>
     </div>

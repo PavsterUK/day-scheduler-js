@@ -19,6 +19,10 @@ textarea {
   padding: 10px;
 }
 
+.hide {
+  visibility: hidden;
+}
+
 .jumbotron {
   text-align: center;
   background-color: transparent;
@@ -27,14 +31,28 @@ textarea {
   border-bottom: 10px solid black;
 }
 
+.timeblocks-wrapper {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
 .description {
   white-space: pre-wrap;
 }
 
+#localstorage-confirmation p {
+  text-align: center;
+  color: green;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+
 .time-block {
   display: grid;
   grid-template-columns: 0.1fr 0.8fr 0.1fr;
-  grid-template-areas: "hour task saveBtn";
+  grid-template-areas: "hour task save-btn";
   text-align: center;
   border-radius: 15px;
 }
@@ -64,17 +82,21 @@ textarea {
   box-shadow: inset 0px 0px 0px 4px rgb(72, 163, 255);
 }
 
-.saveBtn {
+.save-btn {
   border: none;
   border-bottom: 1px solid white;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
-  grid-area: saveBtn;
+  grid-area: save-btn;
 }
 
-.saveBtn i:hover {
+.save-btn:focus {
+  outline: none;
+}
+
+.save-btn i:hover {
   font-size: 2rem;
   transition: all 0.3s ease-in-out;
 }
